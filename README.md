@@ -33,6 +33,7 @@ Kafka ise aldığı mesajları minimum 2 farklı sisteme dağıtacak. Bu iki sis
 
 **NOT:** Teknik Beklentiler kısmındaki *Kısıtlamalar ve Gereksinimler* bölümünü dikkatli okuyunuz.
 
+
 ### Teknik Beklentiler
 
 - Kullanılacak Teknolojiler:
@@ -49,6 +50,7 @@ Kafka ise aldığı mesajları minimum 2 farklı sisteme dağıtacak. Bu iki sis
   - `docker-compose up` komutu ile tüm sistemin ayağa kaldırılabilirliği
   - Projenin nasıl çalıştırılacağına dair README.md dokümantasyonu
   - **Önemli Detay:** Diagram'da yer alan Postgres ve Elastic Search'in kullanılması gerekmemektedir. Onlar yerine Kafka'dan karşılanan mesajları console'a yansıtan iki farklı abone oluşturmamız yeterlidir.
+
 
 ### API
 
@@ -114,6 +116,12 @@ Bir proje tabanı oluşturarak başlayabilirsiniz. Yararlanmak isterseniz:
 - [sample/](sample/) klasörü altında Kafka için bir docker-compose dosyası bulunuyor,
 
 Ardından bu codebase'i bir git repository'sine aktarmanız, çalışma bitiminde de bu repository adresiyle paylaşmanız gerekecek.
+
+
+## Sorularınız
+
+Değerlendirmelerle ilgili sorularınızı [github@setur.com.tr](mailto:github@setur.com.tr) adresine iletebilirsiniz.
+
 
 ### Lisans
 
