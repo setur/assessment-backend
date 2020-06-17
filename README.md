@@ -6,6 +6,33 @@ Bu değerlendirme işe başvuru sürecindeki adaylar için hazırlanmış olup, 
 
 Değerlendirme dahilinde; belirtilen süre içerisinde aşağıda kapsamı ve detayları belirlenmiş projeyi tamamlamanızı beklemekteyiz. Dikkat edebileceğiniz bir diğer husus ise, bizlerin doğru bir değerlendirme yapmamıza yardımcı olacak şekilde iletebileceğiniz en iyi çalışmayı bizlere teslim ediyor olmanız.
 
+
+### Senaryo
+
+Birçok mikroservisin olduğu bir sistemde, diğer servislerde oluşan olay/eventleri toparlayacak yeni bir mikroservis oluşturacağız.
+
+Yeni servisimiz üzerindeki tek REST API endpoint aracılığı ile diğer servislerden olayı detaylarıyla birlikte alacak ve Kafka'ya iletecek.
+
+Kafka ise aldığı mesajları minimum 2 farklı sisteme dağıtacak. Bu iki sistemde de bu mesajları karşılamak yine bizim görevimiz olacak.
+
+
+### Teknik Tasarım
+
+![Diagram](./images/screenshot-01.png)   
+
+
+- Kaynak sistemde oluşan olay/eventler, Tracking servisine HTTP kanalı üzerinden bir dizi/array biçiminde iletilecektir.
+
+- Her bir olay/event mesaj kuyruğuna bir mesaj nesnesi olarak eklenecektir.
+
+- Mesaj kuyruğu işlenirken mesajların yazıldığı kanalda n adet abone/subscriber olacak, Örneğin:
+
+  - İlk abone olayı detayları ile ElasticSearch üzerine yazacak,
+
+  - İkinci abone olayı Postgres’de oluşturulmuş tablo üzerine kaydedecek,
+
+**NOT:** Teknik Beklentiler kısmındaki *Kısıtlamalar ve Gereksinimler* bölümünü dikkatli okuyunuz.
+
 ### Teknik Beklentiler
 
 - Kullanılacak Teknolojiler:
@@ -18,23 +45,10 @@ Değerlendirme dahilinde; belirtilen süre içerisinde aşağıda kapsamı ve de
   - Projenin sık commitlerle Git üzerinde geliştirilmesi
   - Git üzerinde master, development branchleri ve sürüm taglemelerinin kullanımı
   - Minimum %60 unit testing code coverage
+  - Mesajları diğer servislerden toplayan ve kanallarda karşılayan tüm uygulamaların docker-compose dosyasına işlenmesi
+  - `docker-compose up` komutu ile tüm sistemin ayağa kaldırılabilirliği
   - Projenin nasıl çalıştırılacağına dair README.md dokümantasyonu
-
-
-### Teknik Tasarım
-
-![Diagram](./images/screenshot-01.png)   
-
-- Kaynak sistemde oluşan olay/eventler, Tracking servisine HTTP kanalı üzerinden bir dizi/array biçiminde iletilecektir.
-
-- Her bir olay/event mesaj kuyruğuna bir mesaj nesnesi olarak eklenecektir.
-
-- Mesaj kuyruğu işlenirken mesajların yazıldığı kanalda iki adet abone/subscriber olacak,
-
-  - İlki olayı detayları ile ElasticSearch üzerine yazacak,
-
-  - Diğeri ise olayı Postgres’de oluşturulmuş tablo üzerine kaydedecek,
-
+  - **Önemli Detay:** Diagram'da yer alan Postgres ve Elastic Search'in kullanılması gerekmemektedir. Onlar yerine Kafka'dan karşılanan mesajları console'a yansıtan iki farklı abone oluşturmamız yeterlidir.
 
 ### API
 
