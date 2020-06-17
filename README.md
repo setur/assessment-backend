@@ -18,8 +18,9 @@ Kafka ise aldığı mesajları minimum 2 farklı sisteme dağıtacak. Bu iki sis
 
 ### Teknik Tasarım
 
+<div align="center">
 ![Diagram](./images/screenshot-01.png)   
-
+</div>
 
 - Kaynak sistemde oluşan olay/eventler, Tracking servisine HTTP kanalı üzerinden bir dizi/array biçiminde iletilecektir.
 
