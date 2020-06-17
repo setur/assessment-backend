@@ -22,9 +22,9 @@ Kafka ise aldığı mesajları minimum 2 farklı sisteme dağıtacak. Bu iki sis
   <img src="./images/screenshot-01.png" alt="Diagram" title="" />
 </div>
 
-- Kaynak sistemde oluşan olay/eventler, Tracking servisine HTTP kanalı üzerinden bir dizi/array biçiminde iletilecektir.
+- Kaynak sistemde oluşan olay/eventler, oluşturulacak yeni bir servise HTTP kanalı üzerinden bir dizi/array biçiminde iletilecektir.
 
-- Her bir olay/event mesaj kuyruğuna bir mesaj nesnesi olarak eklenecektir.
+- Servise iletilen her bir olay/event mesaj kuyruğuna bir mesaj nesnesi olarak eklenecektir.
 
 - Mesaj kuyruğu işlenirken mesajların yazıldığı kanalda n adet abone/subscriber olacak, Örneğin:
 
@@ -32,7 +32,7 @@ Kafka ise aldığı mesajları minimum 2 farklı sisteme dağıtacak. Bu iki sis
 
   - İkinci abone olayı Postgres’de oluşturulmuş tablo üzerine kaydedecek,
 
-**NOT:** Teknik Beklentiler kısmındaki *Kısıtlamalar ve Gereksinimler* bölümünü dikkatli okuyunuz.
+**NOT:** Değerlendirme ile ilgili beklentiler için *Teknik Beklentiler* bölümünü dikkatli okuyunuz.
 
 
 ### Teknik Beklentiler
@@ -50,7 +50,13 @@ Kafka ise aldığı mesajları minimum 2 farklı sisteme dağıtacak. Bu iki sis
   - Mesajları diğer servislerden toplayan ve kanallarda karşılayan tüm uygulamaların docker-compose dosyasına işlenmesi
   - `docker-compose up` komutu ile tüm sistemin ayağa kaldırılabilirliği
   - Projenin nasıl çalıştırılacağına dair README.md dokümantasyonu
-  - **Önemli Detay:** Diagram'da yer alan Postgres ve Elastic Search'in kullanılması gerekmemektedir. Onlar yerine Kafka'dan karşılanan mesajları console'a yansıtan iki farklı abone oluşturmamız yeterlidir.
+
+- Akış:
+  - HTTP üzerinden oluşturulacak bir mikroservis oluşturularak aşağıdaki API yapısını benimsemesi sağlanmalı
+  - Mikroservis mesajları ayağa kalkan bir Kafka'ya iletmeli
+  - Kafka'daki mesajlar oluşturulacak başka mikroservisleri tetiklemeleri sağlanmalı
+  - Minimum 2 servisin tetiklenmesi beklenmektedir
+  - Tetiklenen servislerin diagram'da yer aldığı gibi Postgres ve Elastic Search'e yazmak yerine karşıladıkları mesajları console'a yansıtmaları yeterlidir
 
 
 ### API
