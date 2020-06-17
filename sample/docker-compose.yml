@@ -1,0 +1,16 @@
+version: '2'
+
+networks:
+  seturdev-net:
+    driver: bridge
+
+services:
+  kafka:
+    image: 'spotify/kafka:latest'
+    networks:
+      - seturdev-net
+    ports:
+      - '9092:9092'
+    environment:
+      - ADVERTISED_HOST=0.0.0.0
+      - ADVERTISED_PORT=9092
